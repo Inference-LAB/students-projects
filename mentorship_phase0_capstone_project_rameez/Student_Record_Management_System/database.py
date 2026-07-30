@@ -22,3 +22,11 @@ SessionLocal=sessionmaker(
     autoflush=False,
     bind=engine
 )
+
+
+
+
+#mistakes made by me in that file:
+# I remembered again loading .env file and importing os
+# I wrote DATABASE_URL=os.getenv("DATABASE_URL") before the both sqlalchemy imports which was wrong syntax,later i fixes that
+#I forgot to write commas in sessionmaker() False,ones
