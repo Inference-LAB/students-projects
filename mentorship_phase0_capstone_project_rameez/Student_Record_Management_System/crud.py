@@ -1,8 +1,17 @@
 from database import SessionLocal
 from models import Student,Course,Enrollment
 
+#custom exception for students
+class StudentNotFoundError(Exception):
+    pass
 
+#custom exception for course
+class CourseNotFoundError(Exception):
+    pass
 
+#custom exception for enrollment:
+class EnrollmentNotFoundError(Exception):
+    pass
 
 
                        #function for students and crud
@@ -59,7 +68,7 @@ def view_students():
           print("done")
           
        
-      session.close()
+   session.close()
 
 
 def update_student():
@@ -67,43 +76,47 @@ def update_student():
 
      session=SessionLocal()
 
-     student_id=int(input("enter student id:"))
+     try:
 
-     student=session.query(Student).filter_by(student_id=student_id).first()
+        student_id=int(input("enter student id:"))
+        student=session.query(Student).filter_by(student_id=student_id).first()
 
-     if student:
-         student.name=input("enter name:")
-         student.roll_number=input("enter roll number:")
-         student.email=input("enter email:")
-         student.department=input("enter department name:")
-         student.semester=int(input("enter semester:"))
-         student.cgpa=float(input("enter cgpa:"))
+        if not student:
+            raise StudentNotFoundError("Student not found")
 
+        student.name=input("enter name:")
+        student.roll_number=input("enter roll number:")
+        student.email=input("enter email:")
+        student.department=input("enter department name:")
+        student.semester=int(input("enter semester:"))
+        student.cgpa=float(input("enter cgpa:"))
 
-     else:
-         print("student not found.")
+        session.commit()
+        print("student updated successfully.")
 
-     session.commit()
-     print("student updated successfully.")
+     except StudentNotFoundError as e:
+        print(e)
+
      session.close()
-
 
 def delete_student():
 
     session=SessionLocal()
 
-    stu_id=int(input("enter student is to delete:"))
+    try:
 
-    student=session.query(Student).filter_by(student_id=stu_id).first()
+        stu_id=int(input("enter student id to delete:"))
+        student=session.query(Student).filter_by(student_id=stu_id).first()
 
-    if student:
+        if not student:
+            raise StudentNotFoundError("Student not found")
+
         session.delete(student)
-
         session.commit()
-        print("student deleted successfully:")
+        print("student deleted successfully.")
 
-    else:
-        print("Stusent not found")
+    except StudentNotFoundError as e:
+        print(e)
 
     session.close()
 
@@ -139,7 +152,7 @@ def view_courses():
     session = SessionLocal()
 
     all_courses = session.query(Course).all()
- #it means if no students found then:
+                            #it means if no students found then:
     if not all_courses:
         print("Courses not found.")
 
@@ -158,70 +171,91 @@ def update_course():
 
     session = SessionLocal()
 
-    course_id = int(input("Enter course id: "))
+    try:
 
-    course = session.query(Course).filter_by(course_id=course_id).first()
+        course_id = int(input("Enter course id: "))
+        course = session.query(Course).filter_by(course_id=course_id).first()
 
-    if course:
+        if not course:
+            raise CourseNotFoundError("Course not found.")
 
         course.course_name = input("Enter course name:")
         course.course_code = input("Enter course code:")
         course.credit_hours = int(input("Enter credit hours:"))
 
         session.commit()
-
         print("Course updated successfully.")
 
-    else:
-        print("Course not found.")
+    except CourseNotFoundError as e:
+        print(e)
 
     session.close()
+
+
 
 def delete_course():
 
     session = SessionLocal()
 
-    course_id = int(input("Enter course id to delete: "))
+    try:
 
-    course = session.query(Course).filter_by(course_id=course_id).first()
+        course_id = int(input("Enter course id to delete: "))
+        course = session.query(Course).filter_by(course_id=course_id).first()
 
-    if course:
+        if not course:
+            raise CourseNotFoundError("Course not found.")
 
         session.delete(course)
-
         session.commit()
 
         print("Course deleted successfully.")
 
-    else:
-        print("Course not found.")
+    except CourseNotFoundError as e:
+        print(e)
 
     session.close()
 
+#we will use custom excepton here in this function too bcuz if id of the student and course does not exists then it will raise an exception without crashing code.
 
 def enroll_student():
 
     session = SessionLocal()
 
-    student_id = int(input("Enter student id: "))
-    course_id = int(input("Enter course id: "))
-    grade = input("Enter grade: ")
+    try:
 
-    new_enrollment = Enrollment(
+        student_id = int(input("Enter student id: "))
+        course_id = int(input("Enter course id: "))
+        grade = input("Enter grade: ")
 
-        student_id=student_id,
-        course_id=course_id,
-        grade=grade
-    )
+        student = session.query(Student).filter_by(student_id=student_id).first()
 
-    session.add(new_enrollment)
+        if not student:
+            raise StudentNotFoundError("Student not found.")
 
-    session.commit()
+        course = session.query(Course).filter_by(course_id=course_id).first()
 
-    print("Student enrolled successfully.")
+        if not course:
+            raise CourseNotFoundError("Course not found.")
+
+        new_enrollment = Enrollment(
+
+            student_id=student_id,
+            course_id=course_id,
+            grade=grade
+        )
+
+        session.add(new_enrollment)
+        session.commit()
+
+        print("Student enrolled successfully.")
+
+    except StudentNotFoundError as e:
+        print(e)
+
+    except CourseNotFoundError as e:
+        print(e)
 
     session.close()
-
 #function which describe who is enrolling in course:
 def view_enrollments():
 
@@ -250,10 +284,14 @@ def update_enrollment():
 
     session = SessionLocal()
 
-    enrollment_id = int(input("Enter enrollment id: "))
-    enrollment = session.query(Enrollment).filter_by(id=enrollment_id).first()
+    try:
 
-    if enrollment:
+        enrollment_id = int(input("Enter enrollment id: "))
+        enrollment = session.query(Enrollment).filter_by(id=enrollment_id).first()
+
+        if not enrollment:
+            raise EnrollmentNotFoundError("Enrollment not found.")
+
         enrollment.student_id = int(input("Enter student id: "))
         enrollment.course_id = int(input("Enter course id: "))
         enrollment.grade = input("Enter grade: ")
@@ -262,8 +300,8 @@ def update_enrollment():
 
         print("Enrollment updated successfully.")
 
-    else:
-        print("Enrollment not found.")
+    except EnrollmentNotFoundError as e:
+        print(e)
 
     session.close()
 
@@ -271,22 +309,24 @@ def delete_enrollment():
 
     session = SessionLocal()
 
-    enrollment_id = int(input("Enter enrollment id to delete: "))
-    enrollment = session.query(Enrollment).filter_by(id=enrollment_id).first()
+    try:
 
-    if enrollment:
+        enrollment_id = int(input("Enter enrollment id to delete: "))
+        enrollment = session.query(Enrollment).filter_by(id=enrollment_id).first()
+
+        if not enrollment:
+            raise EnrollmentNotFoundError("Enrollment not found.")
 
         session.delete(enrollment)
-#it does the save chnages:
+                               #it does the save chnages:
         session.commit()
 
         print("Enrollment deleted successfully.")
 
-    else:
-        print("Enrollment not found.")
+    except EnrollmentNotFoundError as e:
+        print(e)
 
     session.close()
-
 
 
            
