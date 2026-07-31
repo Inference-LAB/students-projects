@@ -10,13 +10,14 @@ load_dotenv()           #it loads the env file into environment
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from models import Base
 
 DATABASE_URL=os.getenv("DATABASE_URL")
 
-DATABASE_URL="postgresql://postgres:rameezpostgres78@localhost:5432/Student_Record_Management_System"
-
 engine=create_engine(DATABASE_URL)
 
+#this line is used to create all table that we define in models.py,we can write that line in main.py too,also import engine and Base there too
+Base.metadata.create_all(bind=engine)
 SessionLocal=sessionmaker(
     autocommit=False,
     autoflush=False,
