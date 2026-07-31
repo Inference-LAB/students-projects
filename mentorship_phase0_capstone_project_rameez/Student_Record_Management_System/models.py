@@ -8,7 +8,7 @@ class Student(Base):
 
     student_id = Column(Integer,primary_key=True)
     name =Column(String,nullable=False)
-    roll_number=Column(Integer,nullable=False,unique=True)
+    roll_number=Column(String,nullable=False,unique=True)
     email=Column(String,nullable=False,unique=True)
     department=Column(String,nullable=False)
     semester=Column(Integer,nullable=False)
