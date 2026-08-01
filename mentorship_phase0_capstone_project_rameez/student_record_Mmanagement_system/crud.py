@@ -22,12 +22,15 @@ def create_student():
                                #CREATE SESSION FACTORY:
     session=SessionLocal()
 
-    name=input("enter name: ")
-    roll_number=(input("enter roll number: "))
-    email=input("enter email:")
-    department=input("enter department:")
-    semester=int(input("enter semester:"))
-    cgpa=float(input("enter cgpa: "))
+        #type hint usage:
+        #here name:str is variable type hint,which mean name return the string input,or store the string
+
+    name:str=input("enter name: ")
+    roll_number:str=(input("enter roll number: "))
+    email:str=input("enter email:")
+    department:str=input("enter department:")
+    semester:int=int(input("enter semester:"))
+    cgpa:float=float(input("enter cgpa: "))
 
     new_student=Student(
 
