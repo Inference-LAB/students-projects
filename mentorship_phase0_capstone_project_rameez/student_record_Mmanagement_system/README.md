@@ -85,15 +85,19 @@ student_record_management_system/
 
 ---
 
-# 📋 Requirements
+# 📦 Requirements
 
-Install dependencies:
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+The project uses the following Python libraries:
+
+- SQLAlchemy
+- psycopg2
+- python-dotenv
 
 # 🔐 Environment Variables
 
