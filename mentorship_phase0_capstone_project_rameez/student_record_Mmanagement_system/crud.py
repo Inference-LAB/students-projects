@@ -133,7 +133,7 @@ def create_course():
 
     course_name = input("Enter course name:")
     course_code = input("Enter course code:")
-    credit_hours = int(input("Enter credit hours:"))
+    credit_hours = float(input("Enter credit hours:"))
   #below lines are just like Inserting in SQL:
     new_course = Course(
 
