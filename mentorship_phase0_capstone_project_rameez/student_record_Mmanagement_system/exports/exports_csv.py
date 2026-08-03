@@ -1,8 +1,6 @@
 import csv
 from database import SessionLocal
-from models import Student
-from models import Course
-from models import Enrollment
+from models import Student,Course,Enrollment
 
 def export_students_to_csv():
 
