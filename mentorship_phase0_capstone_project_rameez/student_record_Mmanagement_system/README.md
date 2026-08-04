@@ -180,6 +180,73 @@ Generated files:
 - Project Structure
 - Environment Variables
 
+## Application Workflow
+
+The Student Record Management System follows a menu-driven workflow. When the application starts, the user is presented with a main menu containing different operations such as Student Management, Course Management, Enrollment Management, CSV Export, and Exit. Based on the user's choice, the corresponding function is executed. If the input is invalid, the system displays an error message and returns to the main menu. The application continues running until the user selects the Exit option.
+
+## Application Workflow Flowchart
+
+                               ┌───────────────┐
+                               │     START     │
+                               └───────┬───────┘
+                                       │
+                                       ▼
+                          ┌────────────────────────┐
+                          │ Execute main.py        │
+                          └───────────┬────────────┘
+                                      │
+                                      ▼
+                        ┌──────────────────────────┐
+                        │ Display Main Menu        │
+                        │--------------------------│
+                        │ 1. Student CRUD          │
+                        │ 2. Course CRUD           │
+                        │ 3. Enrollment CRUD       │
+                        │ 4. Export Tables to CSV  │
+                        │ 0. Exit                  │
+                        └───────────┬──────────────┘
+                                    │
+                                    ▼
+                        ┌──────────────────────────┐
+                        │ User Enters Choice       │
+                        └───────────┬──────────────┘
+                                    │
+                                    ▼
+                          ┌────────────────────┐
+                          │ Is Choice Valid?   │
+                          └───────┬─────┬──────┘
+                                  │Yes  │No
+                                  ▼     ▼
+                   ┌──────────────────┐  ┌──────────────────────┐
+                   │ Execute Selected │  │ Display "Invalid     │
+                   │ Operation        │  │ Choice" Message      │
+                   └─────────┬────────┘  └──────────┬───────────┘
+                             │                      │
+                             ▼                      │
+              ┌──────────────────────────────────┐  │
+              │ Perform Database / CSV Operation │◄─┘
+              │ • Create                         │
+              │ • View                           │
+              │ • Update                         │
+              │ • Delete                         │
+              │ • Export CSV                     │
+              └───────────────┬──────────────────┘
+                              │
+                              ▼
+                 ┌──────────────────────────────┐
+                 │ Display Result / Success     │
+                 └───────────────┬──────────────┘
+                                 │
+                                 ▼
+                      ┌────────────────────────┐
+                      │ Exit Selected?         │
+                      └─────────┬──────┬───────┘
+                                │No    │Yes
+                                ▼      ▼
+                     ┌────────────────┐ ┌──────────────┐
+                     │ Return to Menu │ │     END      │
+                     └────────────────┘ └──────────────┘
+
 ---
 
 # 👨‍💻 Author

@@ -1,4 +1,4 @@
-from database import SessionLocal
+from database import sessionLocal
 from models import Student,Course,Enrollment
 
 #custom exception for students
@@ -20,7 +20,7 @@ def create_student():
     
 
                                #CREATE SESSION FACTORY:
-    session=SessionLocal()
+    session=sessionLocal()
 
         #type hint usage:
         #here name:str is variable type hint,which mean name return the string input,or store the string
@@ -51,7 +51,7 @@ def create_student():
 
 def view_students():
    
-   session=SessionLocal()
+   session=sessionLocal()
 
    all_students=session.query(Student).all()
 
@@ -77,7 +77,7 @@ def view_students():
 def update_student():
 
 
-     session=SessionLocal()
+     session=sessionLocal()
 
      try:
 
@@ -104,7 +104,7 @@ def update_student():
 
 def delete_student():
 
-    session=SessionLocal()
+    session=sessionLocal()
 
     try:
 
@@ -129,7 +129,7 @@ def delete_student():
 
 def create_course():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     course_name = input("Enter course name:")
     course_code = input("Enter course code:")
@@ -152,7 +152,7 @@ def create_course():
                                       #second function of course table:
 def view_courses():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     all_courses = session.query(Course).all()
                             #it means if no students found then:
@@ -172,7 +172,7 @@ def view_courses():
 
 def update_course():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     try:
 
@@ -198,7 +198,7 @@ def update_course():
 
 def delete_course():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     try:
 
@@ -222,7 +222,7 @@ def delete_course():
 
 def enroll_student():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     try:
 
@@ -262,7 +262,7 @@ def enroll_student():
 #function which describe who is enrolling in course:
 def view_enrollments():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     all_enrollments = session.query(Enrollment).all()
 
@@ -285,7 +285,7 @@ def view_enrollments():
                               #update the enrollment table:
 def update_enrollment():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     try:
 
@@ -310,7 +310,7 @@ def update_enrollment():
 
 def delete_enrollment():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
     try:
 

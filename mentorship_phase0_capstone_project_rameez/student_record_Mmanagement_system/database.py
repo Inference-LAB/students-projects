@@ -19,7 +19,7 @@ engine=create_engine(DATABASE_URL)
 #this line is used to create all table that we define in models.py,we can write that line in main.py too,also import engine and Base there too
 Base.metadata.create_all(bind=engine)
 
-SessionLocal=sessionmaker(
+sessionLocal=sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine

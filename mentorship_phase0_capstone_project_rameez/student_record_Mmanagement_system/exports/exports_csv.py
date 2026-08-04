@@ -1,12 +1,10 @@
 import csv
-from database import SessionLocal
-from models import Student
-from models import Course
-from models import Enrollment
+from database import sessionLocal
+from models import Student,Course,Enrollment
 
 def export_students_to_csv():
 
-    session=SessionLocal()
+    session=sessionLocal()
 
     #that line fetch the data from the Student table
     students=session.query(Student).all()
@@ -44,7 +42,7 @@ def export_students_to_csv():
 
 def export_courses_to_csv():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
                               #fetch all data from Course table
     courses = session.query(Course).all()
@@ -75,7 +73,7 @@ def export_courses_to_csv():
 
 def export_enrollments_to_csv():
 
-    session = SessionLocal()
+    session = sessionLocal()
 
                           #fetch all data from Enrollment table
     enrollments = session.query(Enrollment).all()
