@@ -107,18 +107,49 @@ def generate_report():
             print("Average:", average)
             print("Grade:", grade)
 
-            file.write(str(id) + "\n")
-            file.write(str(name) + "\n")
-            file.write(str(age)+ "\n")
-            file.write(str(department)+ "\n")
-            file.write(str(python_marks)+ "\n")
-            file.write(str(database_marks)+ "\n")
-            file.write(str(data_analysis_marks)+ "\n")
-            file.write(str(total_marks)+ "\n")
-            file.write(str(average)+ "\n")
-            file.write(str(grade)+ "\n")
+            file.write("Student ID: ")
+            file.write(str(id))
+            file.write("\n")
 
-    print("Report generated successfully.")
+            file.write("Name: ")
+            file.write(name)
+            file.write("\n")
+
+            file.write("Age: ")
+            file.write(str(age))
+            file.write("\n")
+
+            file.write("Department: ")
+            file.write(department)
+            file.write("\n")
+
+            file.write("Python Marks: ")
+            file.write(str(python_marks))
+            file.write("\n")
+
+            file.write("Database Marks: ")
+            file.write(str(database_marks))
+            file.write("\n")
+
+            file.write("Data Analysis Marks: ")
+            file.write(str(data_analysis_marks))
+            file.write("\n")
+
+            file.write("Total Marks: ")
+            file.write(str(total_marks))
+            file.write("\n")
+
+            file.write("Average Marks: ")
+            file.write(str(average))
+            file.write("\n")
+
+            file.write("Overall Grade: ")
+            file.write(grade)
+            file.write("\n")
+
+            file.write("\n")
+
+            print("Report generated successfully.")
 
 #now we will read all data which is in our generated report file
 def read_report():
